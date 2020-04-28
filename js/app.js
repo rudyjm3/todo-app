@@ -21,6 +21,8 @@ function addTodo(event){
   newTodo.innerText = todoInput.value;
   newTodo.classList.add('todo-item');
   todoDiv.appendChild(newTodo);
+  // ADD TODO TO LOCAL localStorage
+  saveLocalTodos(todoInput.value);
   //Check Mark Button
   const completedButton = document.createElement('button');
   completedButton.innerHTML = '<i class="fas fa-check"></i>';
@@ -80,3 +82,20 @@ function filterTodo(e) {
     }
   });
 }
+
+function saveLocalTodos(todo) {
+  // CHECK TO SEE IF ITEMS ARE ALREADY THERE
+  if(localStorage.getItem('todos') === null) {
+    todos = [];
+  }else{
+    todos = JSON.parse(localStorage.getItem('todos'));
+  }
+
+  todos.push(todo);
+  localStorage.setItem("todos", JSON.stringify(todos));
+console.log(localStorage)
+}
+
+//TO CLEAR LOCAL STORAGE FROM BACKEND/CODE.
+// All code above needs to be commented out and code below active only
+//localStorage.clear();
