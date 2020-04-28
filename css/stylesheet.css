@@ -105,16 +105,16 @@ select {
   cursor: pointer;
   padding: 0.8rem;
 }
-.select::after {
+/*.select::after {
   content: "\25bc";
   position: absolute;
   background: #ff6f47;
   top: 0;
-  right: 0;
+  right: -10px;
   padding: 1rem;
   pointer-events: none;
   transition: all 0.5s ease;
-}
+}*/
 .select:hover::after {
   background: white;
   color: #ff6f47;
