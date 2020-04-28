@@ -86,3 +86,37 @@ form button:hover {
   transform: translateY(8rem) rotateZ(20deg);
   opacity: 0;
 }
+/* ====== Styling for filter options =====*/
+select {
+  -webkit-apperance: none;
+  -moz-apperance: none;
+  apperance: none;
+  outline: none;
+  border: none;
+}
+.select {
+  margin: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+select {
+  color: #ff6f47;
+  width: 10rem;
+  cursor: pointer;
+  padding: 0.8rem;
+}
+.select::after {
+  content: "\25bc";
+  position: absolute;
+  background: #ff6f47;
+  top: 0;
+  right: 0;
+  padding: 1rem;
+  pointer-events: none;
+  transition: all 0.5s ease;
+}
+.select:hover::after {
+  background: white;
+  color: #ff6f47;
+
+}
