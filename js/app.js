@@ -5,6 +5,7 @@ const todoList = document.querySelector('.todo-list');
 const filterOption = document.querySelector('.filter-todo');
 
 //Event Listeners
+document.addEventListener('DOMContentLoaded', getTodos);
 todoButton.addEventListener('click', addTodo);
 todoList.addEventListener('click', deleteCheck);
 filterOption.addEventListener('click', filterTodo);
@@ -46,6 +47,8 @@ function deleteCheck(e) {
     const todo = item.parentElement;
     // Animation
     todo.classList.add("fall");
+    //Line below removes it from local storage when trash button clicked
+    removeLocalTodos(todo);
     todo.addEventListener("transitionend", function() {
       todo.remove();
     })
@@ -85,6 +88,7 @@ function filterTodo(e) {
 
 function saveLocalTodos(todo) {
   // CHECK TO SEE IF ITEMS ARE ALREADY THERE
+  let todos;
   if(localStorage.getItem('todos') === null) {
     todos = [];
   }else{
@@ -96,6 +100,54 @@ function saveLocalTodos(todo) {
 console.log(localStorage)
 }
 
-//TO CLEAR LOCAL STORAGE FROM BACKEND/CODE.
+function getTodos() {
+  let todos;
+  if(localStorage.getItem('todos') === null) {
+    todos = [];
+  }else{
+    todos = JSON.parse(localStorage.getItem('todos'));
+  }
+  todos.forEach(function(todo) {
+    //RESUING CODE FROM LINE 17 - 37 ABOVE AND MAKING EDITS TO
+    //RETREIVE INFO FROM LOCAL STORAGE
+    //Todo Div creation
+    const todoDiv = document.createElement('div');
+    todoDiv.classList.add("todo");
+    //Create li
+    const newTodo = document.createElement('li');
+    //Changed ""= todoInput.value;"" to "todo;"
+    newTodo.innerText = todo;
+    newTodo.classList.add('todo-item');
+    todoDiv.appendChild(newTodo);
+    //Removed local storage code used --> ///
+    /// ADD TODO TO LOCAL localStorage
+    ///saveLocalTodos(todoInput.value);
+    //Check Mark Button
+    const completedButton = document.createElement('button');
+    completedButton.innerHTML = '<i class="fas fa-check"></i>';
+    completedButton.classList.add("completed-btn");
+    todoDiv.appendChild(completedButton);
+    //Check Trash Button
+    const trashButton = document.createElement('button');
+    trashButton.innerHTML = '<i class="fas fa-trash"></i>';
+    trashButton.classList.add("trash-btn");
+    todoDiv.appendChild(trashButton);
+    //Append to List
+    todoList.appendChild(todoDiv);
+  });
+}
+
+function removeLocalTodos(todo) {
+  let todos;
+  if(localStorage.getItem('todos') === null) {
+    todos = [];
+  }else{
+    todos = JSON.parse(localStorage.getItem('todos'));
+  }
+  const todoIndex = todo.children[0].innerText;
+  todos.splice(todos.indexOf(todoIndex), 1);
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
+//TO CLEAR LOCAL STORAGE FROM BROWSER - BACKEND/CODE.
 // All code above needs to be commented out and code below active only
 //localStorage.clear();
