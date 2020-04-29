@@ -88,9 +88,9 @@ form button:hover {
 }
 /* ====== Styling for filter options =====*/
 select {
-  -webkit-apperance: none;
-  -moz-apperance: none;
-  apperance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   outline: none;
   border: none;
 }
@@ -101,20 +101,20 @@ select {
 }
 select {
   color: #ff6f47;
-  width: 10rem;
+  width: 11rem;
   cursor: pointer;
   padding: 0.8rem;
 }
-/*.select::after {
+.select::after {
   content: "\25bc";
   position: absolute;
   background: #ff6f47;
   top: 0;
-  right: -10px;
+  right: 0;
   padding: 1rem;
   pointer-events: none;
   transition: all 0.5s ease;
-}*/
+}
 .select:hover::after {
   background: white;
   color: #ff6f47;
